@@ -11,6 +11,7 @@ import CoreLocation
 
 enum ViewModelState {
     case initialized
+    case gettingLocation
     case loading
     case ready(currentWeather: CurrentWeatherUI)        //TODO: Do it generic
     case error
@@ -24,9 +25,11 @@ protocol CurrentLocationViewModelType {
     init(weatherManager: WeatherManagerType)
 }
 
-final class CurrentLocationViewModel: CurrentLocationViewModelType, CurrentLocationViewControllerDelegate {
+final class CurrentLocationViewModel: NSObject, CurrentLocationViewModelType, CurrentLocationViewControllerDelegate {
 
     var weatherManager: WeatherManagerType
+    let locationManager: CLLocationManager          //TODO: Move to a manager
+    var location: CLLocation?
 
     var state: ViewModelState {
         didSet {
@@ -37,6 +40,7 @@ final class CurrentLocationViewModel: CurrentLocationViewModelType, CurrentLocat
     }
 
     init(weatherManager: WeatherManagerType) {
+        self.locationManager = CLLocationManager()
         self.weatherManager = weatherManager
         self.state = .initialized
         return
@@ -45,16 +49,22 @@ final class CurrentLocationViewModel: CurrentLocationViewModelType, CurrentLocat
 
     //MARK:- CurrentLocationViewControllerDelegate
     func viewDidLoad() {
-        self.state = .loading
+        setUpLocationManager()
+        self.state = .gettingLocation
     }
 
     //MARK:- State Machine
-    func performAcion() {
+    func performAcion(location: CLLocation? = nil) {
         switch self.state {
         case .initialized:
             break
+        case .gettingLocation:
+            break
         case .loading:
-            let location = CLLocation(latitude: 59.337239, longitude: 18.062381)
+            guard let location = self.location else {
+                self.state = .error
+                return
+            }
             self.weatherManager.getWeather(location: location) { (result) in
                 switch result {
                 case .failure:
@@ -87,5 +97,34 @@ final class CurrentLocationViewModel: CurrentLocationViewModelType, CurrentLocat
         }
 
         NotificationCenter.default.post(name: Notification.Name("didUpdateViewModelState"), object: self.state)
+    }
+}
+
+private extension CurrentLocationViewModel {
+    func setUpLocationManager() {
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+    }
+}
+
+extension CurrentLocationViewModel: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.stopUpdatingLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.location = location
+            self.state = .loading
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        self.state = .error
     }
 }

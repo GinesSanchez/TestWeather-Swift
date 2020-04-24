@@ -62,7 +62,7 @@ private extension CurrentLocationViewController {
                 self.summaryLabel.text = nil
                 self.humidityLabel.text = nil
                 self.timeLabel.text = nil
-            case .loading:
+            case .loading, .gettingLocation:
                 self.temperatureLabel.text = "Loading..."
                 self.summaryLabel.text = nil
                 self.humidityLabel.text = nil

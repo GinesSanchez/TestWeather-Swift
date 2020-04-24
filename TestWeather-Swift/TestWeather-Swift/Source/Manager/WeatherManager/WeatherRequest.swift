@@ -24,8 +24,6 @@ enum WeatherRequest: APIRequest {
         switch self {
         case .currentLocation(let location):
             return "forecast/2bb07c3bece89caf533ac9a5d23d8417/\(location.coordinate.latitude),\(location.coordinate.longitude)"
-        default:
-            return "forecast/2bb07c3bece89caf533ac9a5d23d8417"
         }
     }
 

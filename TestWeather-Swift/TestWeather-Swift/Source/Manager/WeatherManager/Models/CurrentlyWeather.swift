@@ -11,7 +11,7 @@ import Foundation
 //The properties are optional following the documentation: https://darksky.net/dev/docs#data-point
 
 struct CurrentlyWeather: Decodable {
-    let time: Int
+    let time: Double
     let summary: String?
     let icon: String?
     let precipIntensity: Double?

@@ -23,6 +23,7 @@ final class WeatherCoordinator: WeatherCoordinatorType {
 
     func start() {
         currentLocationWeather = CurrentLocationViewController.init(nibName: "CurrentLocationViewController", bundle: nil)
+        currentLocationWeather?.viewModel = CurrentLocationViewModel.init(weatherManager: WeatherManager.init(networkManager: NetworkManager.init()))
         self.navigationController .pushViewController(currentLocationWeather!, animated: true)
     }
 

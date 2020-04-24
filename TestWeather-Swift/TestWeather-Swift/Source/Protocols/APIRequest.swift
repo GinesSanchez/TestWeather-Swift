@@ -30,7 +30,7 @@ protocol APIRequest {
 
 extension APIRequest {
     var urlRequest: URLRequest? {
-        let urlPath = apiHost + path
+        let urlPath = schema + apiHost + path
         guard var urlComponents = URLComponents(string: urlPath) else {return nil}
         urlComponents.queryItems = queryParameters?.map { URLQueryItem(name: $0, value: $1) }
 

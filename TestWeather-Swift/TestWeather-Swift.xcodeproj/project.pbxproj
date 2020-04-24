@@ -15,6 +15,10 @@
 		7509BCBA2452E3FE0040F882 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7509BCB82452E3FE0040F882 /* LaunchScreen.storyboard */; };
 		7509BCC52452E3FF0040F882 /* TestWeather_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509BCC42452E3FF0040F882 /* TestWeather_SwiftTests.swift */; };
 		7509BCD62452E4820040F882 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509BCD52452E4820040F882 /* NetworkManager.swift */; };
+		7509BCE02452EA2D0040F882 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509BCDF2452EA2D0040F882 /* Coordinating.swift */; };
+		7509BCE22452EAB60040F882 /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509BCE12452EAB60040F882 /* WeatherCoordinator.swift */; };
+		7509BCE62452EBA30040F882 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7509BCE42452EBA30040F882 /* CurrentLocationViewController.swift */; };
+		7509BCE72452EBA30040F882 /* CurrentLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7509BCE52452EBA30040F882 /* CurrentLocationViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 		7509BCC42452E3FF0040F882 /* TestWeather_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWeather_SwiftTests.swift; sourceTree = "<group>"; };
 		7509BCC62452E3FF0040F882 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7509BCD52452E4820040F882 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7509BCDF2452EA2D0040F882 /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
+		7509BCE12452EAB60040F882 /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
+		7509BCE42452EBA30040F882 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
+		7509BCE52452EBA30040F882 /* CurrentLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentLocationViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +117,7 @@
 		7509BCD02452E4150040F882 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7509BCDE2452EA220040F882 /* Protocols */,
 				7509BCD32452E4660040F882 /* Manager */,
 				7509BCD12452E41F0040F882 /* ViewModules */,
 				7509BCAD2452E3FD0040F882 /* AppDelegate.swift */,
@@ -120,6 +129,7 @@
 		7509BCD12452E41F0040F882 /* ViewModules */ = {
 			isa = PBXGroup;
 			children = (
+				7509BCD72452E9720040F882 /* Weather */,
 				7509BCD22452E4270040F882 /* Default */,
 			);
 			path = ViewModules;
@@ -148,6 +158,32 @@
 				7509BCD52452E4820040F882 /* NetworkManager.swift */,
 			);
 			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		7509BCD72452E9720040F882 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				7509BCE12452EAB60040F882 /* WeatherCoordinator.swift */,
+				7509BCE32452EB8F0040F882 /* CurrentLocationWeather */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		7509BCDE2452EA220040F882 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7509BCDF2452EA2D0040F882 /* Coordinating.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7509BCE32452EB8F0040F882 /* CurrentLocationWeather */ = {
+			isa = PBXGroup;
+			children = (
+				7509BCE42452EBA30040F882 /* CurrentLocationViewController.swift */,
+				7509BCE52452EBA30040F882 /* CurrentLocationViewController.xib */,
+			);
+			path = CurrentLocationWeather;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +270,7 @@
 				7509BCBA2452E3FE0040F882 /* LaunchScreen.storyboard in Resources */,
 				7509BCB72452E3FE0040F882 /* Assets.xcassets in Resources */,
 				7509BCB52452E3FD0040F882 /* Main.storyboard in Resources */,
+				7509BCE72452EBA30040F882 /* CurrentLocationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +290,10 @@
 			files = (
 				7509BCD62452E4820040F882 /* NetworkManager.swift in Sources */,
 				7509BCB22452E3FD0040F882 /* ViewController.swift in Sources */,
+				7509BCE22452EAB60040F882 /* WeatherCoordinator.swift in Sources */,
 				7509BCAE2452E3FD0040F882 /* AppDelegate.swift in Sources */,
+				7509BCE62452EBA30040F882 /* CurrentLocationViewController.swift in Sources */,
+				7509BCE02452EA2D0040F882 /* Coordinating.swift in Sources */,
 				7509BCB02452E3FD0040F882 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
